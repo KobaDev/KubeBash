@@ -1,3 +1,5 @@
+#!/bin/bash
+
 homedir=$(pwd)
 
 echo "[Current directory:] ${homedir}"
