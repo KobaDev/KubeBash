@@ -1,0 +1,11 @@
+Host: Ubuntu or Debian based
+
+Necessary environment variables:
+    AWS_REGION
+    CLUSTER_NAME
+    MICROSERVICE_NAME
+    ENVIRONMENT
+    PROJECT_NAME
+
+Microservice naming structure (can be changed):
+    PROJECT_NAME-MICROSERVICE_NAME-ENVIRONMENT

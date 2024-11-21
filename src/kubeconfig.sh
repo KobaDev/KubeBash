@@ -1,0 +1,1 @@
+aws eks update-kubeconfig --name $1 --region $(aws configure get region)

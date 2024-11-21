@@ -1,0 +1,10 @@
+Valid flags:
+    -l  -   Used for obtaining logs, as in: kubebash -l my_namespace
+
+    -L  -   Used for obtaining logs from all the namespaces in the list "services.txt", all namespaces must be segregated by a new line character.
+
+    -s  -   Starts a shell session in the first pod listed inside given namespace as a parameter.
+
+    -c  -   A simple AWS kubeconfig update given the name of the cluster as a parameter.
+
+    -d  -   Deletion of Evicted pods. This flag detects all pods in Evicted state on ALL NAMESPACES and terminates such pods.
