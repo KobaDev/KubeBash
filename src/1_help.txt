@@ -7,4 +7,4 @@ Valid flags:
 
     -c  -   A simple AWS kubeconfig update given the name of the cluster as a parameter.
 
-    -d  -   Deletion of Evicted pods. This flag detects all pods in Evicted state on ALL NAMESPACES and terminates such pods.
+    -d  -   Deletion of Evicted pods. This flag detects all pods in Evicted state on ALL NAMESPACES and terminates such pods. Must have a 'true' value.

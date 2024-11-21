@@ -7,17 +7,17 @@ else
     loop=0
     pwd=$(pwd)
 
-    if [ ! -d "$pwd/../service_logs/$1" ]; then
-        mkdir -p "$pwd/../service_logs/$1"
+    if [ ! -d "$pwd/service_logs/$1" ]; then
+        mkdir -p "$pwd/service_logs/$1"
     else
-        rm "$pwd"/../service_logs/$1/*
+        rm "$pwd"/service_logs/$1/*
     fi
-    
+
     while [ true ]
     do
         if [ ! -z "${arr[$loop]}" ]; then
             echo "[Creating logs for pod...] ${arr[$loop]}"
-            kubectl logs ${arr[$loop]} -n $1 > "$pwd/../service_logs/$1/${arr[$loop]}.log"
+            kubectl logs ${arr[$loop]} -n $1 > "$pwd/service_logs/$1/${arr[$loop]}.log"
             loop=$(( $loop + 1 ))
         else
             echo "[Operation ended.]"
