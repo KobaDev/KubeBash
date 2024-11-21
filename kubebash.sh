@@ -11,9 +11,9 @@ while getopts ":c:l:Ls:dh" opt; do
     ;;
     d) ./src/deleteevicted.sh
     ;;
-    h) cat src/1_help.txt
+    h) cat src/_help.txt
 ;;
-    \?) echo "Invalid option: -$OPTARG" >&2; echo ""; cat src/1_help.txt; echo ""; exit 1
+    \?) echo "Invalid option: -$OPTARG" >&2; echo ""; cat src/_help.txt; echo ""; exit 1
     ;;
   esac
 done
