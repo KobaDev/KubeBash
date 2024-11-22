@@ -1,27 +1,27 @@
-export output=$(kubectl get pods --no-headers -o custom-columns=":metadata.name" -n $1)
+export output=$(kubectl get pods -n $1 --no-headers -o custom-columns=":metadata.name")
 
-if [ -z "$output" ]; then
-    echo "[No pods were found in the namespace]".
+[ -z "$output" ] && echo "[No pods were found in the namespace.] $1" && exit 0
+
+readarray -t pods <<< "$output"
+logs_dir="$(pwd)/service_logs"
+
+if [ -d "${logs_dir}/$1" ]; then
+    rm "${logs_dir}/$1/"*/*
+    rmdir "${logs_dir}/$1/"*
 else
-    readarray -t arr <<< "$output"
-    loop=0
-    pwd=$(pwd)
-
-    if [ ! -d "$pwd/service_logs/$1" ]; then
-        mkdir -p "$pwd/service_logs/$1"
-    else
-        rm "$pwd"/service_logs/$1/*
-    fi
-
-    while [ true ]
-    do
-        if [ ! -z "${arr[$loop]}" ]; then
-            echo "[Creating logs for pod...] ${arr[$loop]}"
-            kubectl logs ${arr[$loop]} -n $1 > "$pwd/service_logs/$1/${arr[$loop]}.log"
-            loop=$(( $loop + 1 ))
-        else
-            echo "[Operation ended.]"
-            break
-        fi
-    done
+    mkdir -p "${logs_dir}/$1"
 fi
+
+for p in "${pods[@]}";
+do
+    mkdir -p "${logs_dir}/$1/$p"
+    readarray -t containers <<< $(kubectl get pods $p -n $1 -o jsonpath="{.spec['containers','initContainers'][*].name}")
+    for c in "${containers[@]}";
+    do
+        echo "[Creating logs for pod...] $p $c"
+        kubectl logs $p -n $1 -c $c> "${logs_dir}/$1/$p/$c.log"
+    done
+done
+
+echo "[Operation ended.]"
+
