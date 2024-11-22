@@ -1,4 +1,5 @@
 #!/bin/bash
+[ -z "$1" ] && echo -e "$(cat src/_help.txt)\n" && exit 1
 while getopts ":c:l:Ls:dhni" opt; do
   case $opt in
     c) ./src/kubeconfig.sh "$OPTARG"
@@ -17,7 +18,9 @@ while getopts ":c:l:Ls:dhni" opt; do
     ;;
     h) cat src/_help.txt
     ;;
-    \?) echo "Invalid option: -$OPTARG" >&2; echo ""; cat src/_help.txt; echo ""; exit 1
+    \?) echo "Invalid option: -$OPTARG" >&2; echo -e "\n$(cat src/_help.txt)\n"; exit 1
     ;;
   esac
 done
+
+
