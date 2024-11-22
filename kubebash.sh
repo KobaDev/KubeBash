@@ -1,5 +1,5 @@
 #!/bin/bash
-while getopts ":c:l:Ls:dh" opt; do
+while getopts ":c:l:Ls:dh:ni" opt; do
   case $opt in
     c) ./src/kubeconfig.sh "$OPTARG"
     ;;
@@ -10,6 +10,10 @@ while getopts ":c:l:Ls:dh" opt; do
     s) ./src/getshell.sh "$OPTARG"
     ;;
     d) ./src/deleteevicted.sh
+    ;;
+    n) ./src/getnonrunningpods.sh
+    ;;
+    i) ./src/getallingresses.sh
     ;;
     h) cat src/_help.txt
 ;;

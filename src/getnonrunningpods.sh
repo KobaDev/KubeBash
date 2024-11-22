@@ -1,0 +1,1 @@
+kubectl get pods -A | grep -Ev '([0-9]+)/\1' | grep -v Completed

@@ -1,0 +1,1 @@
+kubectl get --all-namespaces ingress -o json 2> /dev/null | jq -r '(["INGRESS","NAMESPACE"] | (., map(length*"-"))), (.items[] | [.spec.rules[].http.paths[].path, .metadata.namespace]) | @tsv' | column -t
