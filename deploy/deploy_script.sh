@@ -42,7 +42,7 @@ ls
 echo "[End of file listing]"
 
 echo "[Creating namespace (if it does not exist)...]"
-kubectl create namespace ${PROJECT_NAME}-${MICROSERVICE_NAME}-${ENVIRONMENT} --dry-run=server -o yaml | kubectl apply -f -
+kubectl create namespace ${PROJECT_NAME}-${MICROSERVICE_NAME}-${ENVIRONMENT} -o yaml | kubectl apply -f -
 
 echo "[Deleting deployment]"
 kubectl delete deployment ${MICROSERVICE_NAME} -n=${PROJECT_NAME}-${MICROSERVICE_NAME}-${ENVIRONMENT}
